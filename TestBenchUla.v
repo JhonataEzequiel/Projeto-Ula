@@ -1,7 +1,7 @@
 module TestBenchUla();
 reg [3:0]Sel;
 reg [1:0]A, B;
-wire [1:0]Saida;
+wire [2:0]Saida;
 
 ula u1(.Sel(Sel), .A(A), .B(B), .Saida(Saida));
 
