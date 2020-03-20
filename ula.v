@@ -47,7 +47,7 @@ always@(*)begin
 			
 		4'b1110: 
 			begin
-				if(A < B) begin
+				if(A > B) begin
 					Saida <= 1;
 				end
 				else begin

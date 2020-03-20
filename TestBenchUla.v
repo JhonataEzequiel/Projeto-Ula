@@ -116,7 +116,7 @@ initial begin
 		A = 2'b10; B = 1'b1; Sel = 4'b1101; #10; 
 		A = 2'b11; B = 1'b0; Sel = 4'b1101; #10;
 		A = 2'b11; B = 1'b1; Sel = 4'b1101; #10; 
-//Sel = 1110 -> A<B (B precisa de 2 bits aqui)
+//Sel = 1110 -> A>B (B precisa de 2 bits aqui)
 		A = 2'b00; B = 2'b00; Sel = 4'b1110; #10; 
 		A = 2'b00; B = 2'b01; Sel = 4'b1110; #10; 
 		A = 2'b00; B = 2'b10; Sel = 4'b1110; #10; 
