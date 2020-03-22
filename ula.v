@@ -1,19 +1,19 @@
 module ula(Sel, A, B, Saida, clk);
 input clk;
-input [1:0]A; //Para que haja deslocamento de bits e rotacionamento, o A precisa ter mais que 1 bit
-input B; 
-output reg [2:0]Saida; //O maior número que a saída irá assumir será 3'b100, resultante da expressão "2'b11 + 1'b1"
+input [7:0]A; //Para que haja deslocamento de bits e rotacionamento, o A precisa ter mais que 1 bit
+input [7:0]B; 
+output reg [7:0]Saida; //O maior número que a saída irá assumir será 3'b100, resultante da expressão "2'b11 + 1'b1"
 input [3:0]Sel; //Chave Seletora
 
-reg [1:0]auxiliar;
+reg [7:0]auxiliar;
 
 wire And1, Xor1, Or1;
 
-and (And1, A[1:0], B); xor (Xor1, A, B); or (Or1, A, B);
+and (And1, A, B); xor (Xor1, A, B); or (Or1, A, B);
 
 always@(posedge clk)begin
 	case (Sel)
-		4'b0000:Saida <= {1'b0, A} + {1'b0, B}; //Soma
+		4'b0000:Saida <= A + B; //Soma
 		/*
 			é preciso concatenar um bit antes das entradas, para que o Carry Out de 2'b11 + 1'b1
 			seja adicionado a expressão
@@ -29,12 +29,12 @@ always@(posedge clk)begin
 		4'b0101:Saida <= (A >> 1);//Deslocamento pra direita
 		
 		4'b0110:begin
-			auxiliar = {A[0], A[1]};//Rotacionamento pra direita
+			auxiliar = {A[0], A[7:1]};//Rotacionamento pra direita
 			Saida <= auxiliar;
 			end
 		
 		4'b0111:begin
-			auxiliar = {A[0], A[1]};//Rotacionamento pra esquerda, é igual pq A tem apenas 2 bits
+			auxiliar = {A[6:0], A[7]};//Rotacionamento pra esquerda
 			Saida <= auxiliar;
 			end
 		
